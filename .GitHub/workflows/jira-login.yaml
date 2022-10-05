@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 on: push
 
 name: Jira Example
@@ -12,7 +36,7 @@ jobs:
 
     steps:
 
-    - name: Login
+    - name: Login Directly via Secrets
 
       uses: atlassian/gajira-login@master
 
@@ -20,4 +44,22 @@ jobs:
 
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
 
-    - name: Jira TODO1ame: jiralogin 
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+    - name: Jira TODO
+
+      uses: atlassian/gajira-todo@master
+
+      with:
+
+        project: CICD34
+
+        issuetype: Task
+
+        description: Created automatically via GitHub Actions
+
+      env:
+
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
